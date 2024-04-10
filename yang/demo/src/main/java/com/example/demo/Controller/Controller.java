@@ -25,64 +25,15 @@ public class Controller
     PersonaRepository personaRepository;
 
     //aggiungere
-    @PostMapping()
+    @PostMapping("/register")
         public void addPersona(@RequestBody Persona persona) {
             personaRepository.save(persona);  
         }
-    //visualizzare
-    @GetMapping("/list")
-        public List<Persona> list(){
-            return personaRepository.findAll();
-        }
-    @GetMapping("/find")
-        public Optional<Persona> find_id(@RequestParam Long id){
-            return personaRepository.findById(id);
-        }
-    //aggioranare
-    @PutMapping("/update")
-        public String updatePersona(@RequestParam Long id,@RequestBody Persona persona){
-            try {
-                Optional<Persona> p_Optional = personaRepository.findById(id);  
-                Persona p = p_Optional.get();
-                p.update(persona.getName(),persona.getSurname(),persona.getAge());
-                personaRepository.save(p);
-            } catch (Exception e) {
-                // TODO: handle exception
-                return "Error:id not found";
-            }
-            return "succesful\n";
-            
-        }
-    //eliminare per id
-    @DeleteMapping("/delete")
-        public String deleteBy_id(@RequestParam Long id){
-            try {
-                personaRepository.deleteById(id);
-            } catch (Exception e) {
-                // TODO: handle exception
-                return "Error";
-            }
-            return "succesful\n";
-        }
-    //eliminare tutto
-    @DeleteMapping("/deleteAll")
-        public void delete_all(){
-            personaRepository.deleteAll();
+    @PostMapping("/login")
+        public Persona loginPersona(@RequestParam String username,@RequestParam String password) {
+            return personaRepository.findByUsernameAndPassword(username,password);  
         }
 
-    @GetMapping()
-        public String findBy_id(@RequestParam Long id){
-            Optional<Persona> p_Optional;
-            Persona p;
-            try {
-                p_Optional = personaRepository.findById(id);
-                p = p_Optional.get();
-            } catch (Exception e) {
-                // TODO: handle exception
-                return "Error:id not found";
-            }
-            return p.toString();
-        }
         
 
  

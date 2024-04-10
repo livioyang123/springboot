@@ -11,22 +11,19 @@ public class Persona {
     public long id;
     public String name;
     public String surname;
-    public int age;
+    public String username;
+    public String password;
+    public String email;
 
     Persona(){
 
     }
 
-    Persona(String name,String surname,int age){
-        this.name = name;
-        this.surname = surname;
-        this.age = age;
+    Persona(String username,String password){
+        this.username = username;
+        this.password = password;
     }
 
-
-    public int getAge() {
-        return age;
-    }
     public long getId() {
         return id;
     }
@@ -36,8 +33,23 @@ public class Persona {
     public String getSurname() {
         return surname;
     }
-    public void setAge(int age) {
-        this.age = age;
+    public String getEmail() {
+        return email;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public String getUsername() {
+        return username;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    public void setUsername(String username) {
+        this.username = username;
     }
     public void setId(long id) {
         this.id = id;
@@ -49,15 +61,4 @@ public class Persona {
         this.surname = surname;
     }
 
-    public void update(String name,String surname,int age){
-        setName(name);
-        setSurname(surname);
-        setAge(age);
-    }
-
-    @Override
-    public String toString() {
-        // TODO Auto-generated method stub
-        return "{id="+getId()+",name="+getName()+",surname="+getSurname()+",age="+getAge()+"}";
-    }
 }
